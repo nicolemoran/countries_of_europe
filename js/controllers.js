@@ -1,5 +1,7 @@
-var countryControllers = angular.module('countryControllers', ['ngAnimate']);
+//Define the Angular app
+var countryControllers = angular.module('countryControllers', []);
 
+//Controls the search page
 countryControllers.controller('ListController', ['$scope', '$http', function($scope, $http) {
   $http.get('js/data.json').success(function(data) {
     $scope.countries = data.countries;
@@ -7,23 +9,17 @@ countryControllers.controller('ListController', ['$scope', '$http', function($sc
   });
 }]);
 
+//Controls the details page
 countryControllers.controller('DetailsController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
   $http.get('js/data.json').success(function(data) {
     $scope.countries = data.countries;
     $scope.whichItem = $routeParams.itemId;
-
-    if($routeParams.itemId > 0) {
-    	$scope.previtem = Number($routeParams.itemId)-1;
-    } else {
-    	$scope.prevItem = $scope.countries.length-1;
-    }
-
-    if($routeParams.itemId < $scope.countries.length-1) {
-    	$scope.nextitem = Number($routeParams.itemId)+1;
-    } else {
-    	$scope.nextItem = 0;
-    }
-
   });
 }]);
 
+//Controls the quiz page
+countryControllers.controller('quizController', ['$scope', '$http', function($scope, $http) {
+  $http.get('js/data.json').success(function(data) {
+    $scope.countries = data.countries;
+  });
+}]);
